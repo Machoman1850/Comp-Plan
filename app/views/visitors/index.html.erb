@@ -3,12 +3,52 @@
 
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1>A Bootstrap Starter Template</h1>
-            <p class="lead">A Bootstrap HTML starter template from <a href="http://startbootstrap.com/">startbootstrap.com</a>.</p>
-            <ul class="list-unstyled">
-                <li>Bootstrap</li>
-                <li>jQuery</li>
-            </ul>
+            <table class="table table-bordered">
+              <tr>
+                <th>Title</th>
+                <th># Founders</th>
+                <th>Percentile</th>
+                <th>Base Salary</th>
+                <th>Target Bonus / Commission</th>
+                <th>Total Target Pay</th>
+                <th>Total Diluted Shares</th>
+              </tr>
+              <% @primary_titles.each do |title| %>
+              <% items = CompItem.where(primary_title: title) %>
+              <tr>
+                <td style="max-width: 100px; vertical-align: middle; word-wrap: break-word;"><%= title.name %></td>
+                <td style="vertical-align: middle;"><%= items.where(founder: true).count %></td>
+                <td><table>
+                  <tr><td><span>25th Percentile</span></td></tr>
+                  <tr><td><span>50th Percentile</span></td></tr>
+                  <tr><td><span>75th Percentile</span></td></tr>
+                </table></td>
+                <td><table style="width: 100%;">
+                  <% base = items.map(&:base_salary) %>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(25).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(50).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(75).round(0), delimiter: ',') %></span></td></tr>
+                </table></td>
+                <td><table style="width: 100%;">
+                  <% base = items.map(&:bonus) %>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(25).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(50).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(75).round(0), delimiter: ',') %></span></td></tr>
+                </table></td>
+                <td><table style="width: 100%;">
+                  <% base = items.map {|item| item.base_salary + item.bonus} %>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(25).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(50).round(0), delimiter: ',') %></span></td></tr>
+                  <tr><td style="text-align: center;"><span>$<%= number_with_delimiter(base.percentile(75).round(0), delimiter: ',') %></span></td></tr>
+                </table></td>
+                <td><table style="width: 100%;">
+                  <% base = items.map(&:percent_of_shares) %>
+                  <tr><td style="text-align: center;"><span><%= number_with_delimiter((base.percentile(25) * 100).round(3), delimiter: ',') %>%</span></td></tr>
+                  <tr><td style="text-align: center;"><span><%= number_with_delimiter((base.percentile(50) * 100).round(3), delimiter: ',') %>%</span></td></tr>
+                  <tr><td style="text-align: center;"><span><%= number_with_delimiter((base.percentile(75) * 100).round(3), delimiter: ',') %>%</span></td></tr>
+                </table></td>                
+              </tr>
+              <% end %>
         </div>
     </div>
     <!-- /.row -->

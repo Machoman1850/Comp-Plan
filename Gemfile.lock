@@ -72,6 +72,7 @@ GEM
     concurrent-ruby (1.0.0)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    descriptive_statistics (2.5.1)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -190,6 +191,9 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
+    simple_xlsx_reader (1.0.2)
+      nokogiri
+      rubyzip
     spring (1.6.3)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -229,6 +233,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner
+  descriptive_statistics
   devise
   factory_girl_rails
   faker
@@ -246,6 +251,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_form
+  simple_xlsx_reader
   spring
   spring-commands-rspec
   uglifier (>= 1.3.0)

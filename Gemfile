@@ -8,6 +8,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'rubyXL'
+gem 'simple_xlsx_reader'
+gem 'descriptive_statistics'
 
 group :development, :test do
   gem 'byebug'
