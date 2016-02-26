@@ -16,7 +16,7 @@
               <% @primary_titles.each do |title| %>
               <% items = CompItem.where(primary_title: title) %>
               <tr>
-                <td style="max-width: 100px; vertical-align: middle; word-wrap: break-word;"><%= title.name %></td>
+                <td style="max-width: 100px; vertical-align: middle; word-wrap: break-word;"><%= link_to title.name, primary_title_path(title) %></td>
                 <td style="vertical-align: middle;"><%= items.where(founder: true).count %></td>
                 <td><table>
                   <tr><td><span>25th Percentile</span></td></tr>

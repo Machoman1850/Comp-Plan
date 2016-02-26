@@ -29,7 +29,7 @@
 			comp_item.base_salary = row[6]
 			comp_item.bonus = row[8]
 			comp_item.percent_of_shares = row[12] * 100
-			comp_item.company_founded = row[13]
+			comp_item.company_founded = DateTime.new(row[13].to_i, 1, 1)
 			comp_item.industry = Industry.find_or_create_by(name: row[14])
 			comp_item.development_stage = DevelopmentStage.find_or_create_by(name: row[15])
 			comp_item.funding_round = FundingRound.find_or_create_by(name: row[16])

@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<table>
+			  <tr>
+			    <th>Company Title</th>
+			    <th>Founder</th>
+			    <th>Status</th>
+			    <th>Employee Region</th>
+			    <th>Base Salary</th>
+			    <th>Target Bonus</th>
+			    <th>Total Pay</th>
+			    <th>% Fully Diluted Shares</th>
+			    <th>Company Founded On</th>
+			    <th>Industry</th>
+			    <th>Development Stage</th>
+			    <th>Capital Raised</th>
+			    <th>Funding Round</th>
+			    <th>Revenue</th>
+			    <th>Headcount</th>
+			  </tr>
+			  <% @items.each do |item| %>
+			  <tr>
+			    <td><%= item.company_title %></td>
+			    <td><%= item.founder? ? "Yes" : "No" %></td>
+			    <td><%= item.full_time? ? "Full Time" : "Part Time" %></td>
+			    <td><%= item.employee_region.name %></td>
+			    <td>$<%= number_with_delimiter(item.base_salary, delimiter: ',') %></td>
+			    <td>$<%= number_with_delimiter(item.bonus, delimiter: ',') %></td>
+			    <td>$<%= number_with_delimiter(item.base_salary + item.bonus, delimiter: ',') %></td>
+			    <td><%= (item.percent_of_shares * 100).round(2) %>%</td>
+			    <td><%= item.company_founded.year %></td>
+			    <td><%= item.industry.name %></td>
+			    <td><%= item.development_stage.name %></td>
+			    <td><%= item.funding_round.name %></td>
+			    <td><%= item.capital_raised.name %></td>
+			    <td><%= item.revenue.name %></td>
+			    <td><%= item.head_count.name %></td>
+			  </tr>
+			  <% end %>
+			</table>
+		</div>
+	</div>
+</div>
